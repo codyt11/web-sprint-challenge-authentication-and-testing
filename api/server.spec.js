@@ -20,7 +20,7 @@ describe("server.js", () => {
       await db("users").truncate();
       const res = await request(server)
         .post("/api/auth/register")
-        .send({user: "user3", password: "password"})
+        .send({username: "user3", password: "password"})
         .then(res => {
             expect(res.status).toBe(201);
         })
@@ -35,7 +35,7 @@ describe("server.js", () => {
   });
   describe("Login", () => {
     it("should return a status of 200 with test user", async () => {
-      const res = await request(server).post("/api/auth/login").send(testUser);
+      const res = await request(server).post("/api/auth/login").send({username:"user3", password:"password"});
       expect(res.status).toBe(200);
     });
     it("should return a status of 401 when given a non-valid user", async () => {
